@@ -26,16 +26,21 @@ sum(); //104 Выводит сумму всех переданных до это
 
 // Вариант с поочередный вызовом вида sum(a)(b)(n)()
 
-const sum2 = (a) => {
-    return (b) => {
-        if (b) {
-            return sum2(a + b)
+const sum2 = (number) => {
+
+    let acum = number;
+
+    return (nextNum) => {
+
+        if (nextNum !== undefined) {
+            return sum2(acum + nextNum);
         } else {
-            return a
+            return acum;
         }    
+
     }
 }
 
 console.log(sum2(2)(10)(3)(-3)(34)()) //46
 console.log(sum2(2)(10)()) //12
-console.log(sum2()()) //undefined
+console.log(sum2(0)()) //0
